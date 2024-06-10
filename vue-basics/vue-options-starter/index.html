@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Options Starter</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input v-model="userInput" type="text" placeholder="your text.." />
+
+        <p v-if="userInput">Uppercase Version: <strong>{{ userInput.toUpperCase() }}</strong></p>
+    </div>
+</body>
+<script>
+    const options = {
+        data() {
+            return {
+                userInput: ""
+            }
+        }
+    }
+    Vue.createApp(options).mount("#app");
+</script>
+</html>
