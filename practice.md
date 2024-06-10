@@ -32,6 +32,8 @@ Extend our Vue ToDo app, so that it also takes color as input for each todo and 
 
 https://github.com/frappe/changemakers/assets/34810212/d0205bb6-910f-46fd-9365-2fda43cc133c
 
+Hint: You have to apply dynamic styles here, check out attribute bindings part [here](https://vuejs.org/guide/essentials/template-syntax.html#attribute-bindings).
+
 **Exercise 5**
 
 Implement <kbd>Ctrl + Enter</kbd> as keyboard shortcut to create a new todo.
