@@ -6,7 +6,7 @@ Note: Please complete the essential readings for this day before proceeding.
 
 **Exercise 1**
 
-Implement Edit todo functionality in our Vanilla JS counter. You can start with [`dom/vanilla-counter-end`](./dom/vanilla-counter-end) as the starting point.
+Implement Edit todo functionality in our Vanilla JS counter. You can start with [`dom/vanilla-todo`](./dom/vanilla-todo) as the starting point.
 
 **Exercise 2**
 
