@@ -28,8 +28,12 @@ Implement Edit todo functionality in our Vue based ToDo app.
 
 **Exercise 4**
 
-Extend our Vue ToDo app, so that it also takes color as input for each todo and display it as a rectangle before the description of the ToDo.
+Extend our Vue ToDo app, so that it also takes color as input for each todo and display it as a rectangle before the description of the ToDo:
+
+https://github.com/frappe/changemakers/assets/34810212/d0205bb6-910f-46fd-9365-2fda43cc133c
 
 **Exercise 5**
 
-Build a Vue-based SPA that displays the keys currently pressed by the user.
+Implement <kbd>Ctrl + Enter</kbd> as keyboard shortcut to create a new todo.
+
+[Here is a hint.](https://vuejs.org/guide/essentials/event-handling.html#key-modifiers)
