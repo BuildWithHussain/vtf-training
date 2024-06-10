@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Counter</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="increment">Increment</button>
+        <button @click="reset">Reset</button>
+        <p>{{ count }}</p>
+    </div>
+</body>
+<script>
+    const options = {
+        data() {
+            return {
+                count: 0
+            }
+        },
+        methods: {
+            increment() {
+                this.count++;
+            },
+            reset() {
+                this.count = 0;
+            }
+        }
+    }
+    Vue.createApp(options).mount("#app");
+</script>
+</html>

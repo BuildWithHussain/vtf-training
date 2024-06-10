@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vanilla Counter</title>
+    <meta charset="UTF-8" />
+  </head>
+
+  <body>
+    <button id="increment-button">Increment</button>
+    <p id="count-display">0</p>
+  </body>
+
+  <script>
+    // counter
+    let count = 0;
+
+    const incrementButton = document.getElementById("increment-button");
+    const countDisplay = document.getElementById("count-display");
+
+    incrementButton.addEventListener("click", () => {
+      count++;
+      setCountOnPage(); // "re-render", so updated value is displayed
+    });
+
+    function setCountOnPage() {
+      countDisplay.innerHTML = count;
+    }
+  </script>
+</html>
