@@ -1,6 +1,4 @@
-## Hands-on Assignments
-
-### Day 1
+## Hands-on Assignments: Day 1
 
 Note: Please complete the essential readings for this day before proceeding.
 
