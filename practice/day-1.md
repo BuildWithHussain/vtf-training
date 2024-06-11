@@ -10,7 +10,7 @@ Implement Edit todo functionality in our Vanilla JS counter. You can start with 
 
 Create a Vue based app that shows the user's input in uppercase as they type:
 
-![Screenshot](.github/images/vue-uppercase.png)
+![Screenshot](../.github/images/vue-uppercase.png)
 
 Video:
 
