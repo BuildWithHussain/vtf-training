@@ -121,7 +121,7 @@ nav ul li button:hover {
 </style>
 ```
 
-Once you are done, there should not be a single line of Vanilla CSS in the `style` section and you should be able to delete it without any effect to the styles.
+Once you are done, there should not be a single line of Vanilla CSS in the `style` section and you should be able to delete it without any effect to the look of the page.
 
 ### Task 4, Bring in the `List` component
 
