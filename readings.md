@@ -26,6 +26,8 @@
 
 1. [Computed Properties](https://vuejs.org/guide/essentials/computed.html)
 
+1. [Lifecycle Hooks](https://vuejs.org/guide/essentials/lifecycle.html)
+
 1. [Component Basics](https://vuejs.org/guide/essentials/component-basics.html)
 
 1. [Component Props](https://vuejs.org/guide/components/props.html)
