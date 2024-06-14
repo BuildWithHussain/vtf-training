@@ -1,4 +1,4 @@
-## Hands-on Assignments: Day 2
+## a Day 2
 
 ### Task 1, Setup a new Vue Project
 
@@ -13,7 +13,7 @@ You can name it whatever you like. Cleanup the project by:
 
 ### Task 2, Add TailwindCSS to the Project
 
-Visit [this](TODO) link and follow the instructions to setup TailwindCSS in your VueJS project.
+Visit [this](https://tailwindcss.com/docs/guides/vite#vue) link and follow the instructions to setup TailwindCSS in your VueJS project.
 
 > Note: if you are using VSCode, install the TailwindCSS Extension! ([link](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss))
 
