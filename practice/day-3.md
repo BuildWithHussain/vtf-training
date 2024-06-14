@@ -45,7 +45,7 @@ $ npm install frappe-ui
 
 Now, open up your `tailwind.config.js` file and make the following additions:
 
-```js
+```diff
 + import tailwindConfig from "frappe-ui/src/utils/tailwind.config";
 
 export default {
@@ -66,7 +66,7 @@ By making the above changes, we are configuring tailwind to use the design token
 
 Open up `vite.config.js` file and add the following lines:
 
-```js
+```diff
 import { fileURLToPath, URL } from 'node:url'
 + import frappeui from "frappe-ui/vite";
 import { defineConfig } from 'vite'
