@@ -109,6 +109,59 @@ Start by creating a new component named `Header.vue` and add it to your `App.vue
 
 2. Since our frontend app (SPA) lives outside of the desk (Frappe's admin interface), it has become a pattern to provide *an easy way to switch back to the desk*. Use the `Avatar` & `Dropdown` component from `frappe-ui` to implement what you see in the video above.
 
-3. You can use this cool avatar placeholder: `https://i.pravatar.cc/300` for the avatar image. The size of the avatar is `2xl`.
+3. You can use this cool avatar placeholder: `https://i.pravatar.cc/100` for the avatar image. The size of the avatar is `2xl`.
 
 4. Notice the cursor (pointer) when you hover over the avatar.
+
+### Task 5: **R**ead / List View
+
+In order to do CRUD on our Frappe backend, we will need to first have a database table to store our support tickets, i.e. DocType time! Create a new DocType named **Support Ticket** with the following configurations:
+
+1. Naming Rule: Auto-increment
+1. Fields:
+    1. Title (data, mandatory)
+    1. Status (select, default is Open) [Open, Waiting for reply, Resolved, Closed]
+    1. Purchase Date (date)
+    1. Category (select) [Paper Quality, Delivery, Other]
+
+Now, use FrappeUI's `ListView` component along with the `createListResource` utility to display the list of **Support Ticket**s from the backend! For keeping the code clean and organized, implement this in a separate component, `TicketList.vue` and add it to the root component (`App`):
+
+![Screenshot showing tickets list](../.github/images/tickets-list-v1.png)
+
+> Note that I have also added an heading above the list
+
+Here are some implementation details:
+
+* 3 columns
+* Latest tickets should be shown first (hint: look for `orderBy` in list resource docs!)
+* Rows are not `selectable`
+
+**Tip**
+
+To keep your template clean and less verbose, you might want to define columns and rows in the scripts area:
+
+```js
+const columns = [
+    // ...
+]
+
+🤔 // Think why I am using computed here!
+const rows = computed(() => {
+    // ...
+})
+```
+
+*Optional Challenge*
+
+Render a `Badge` for the status column instead of plain text:
+
+![Tickets list with badge component](../.github/images/tickets-list-v2.png)
+
+> Hint: Experiment with the **Cell Slot** variant of the ListView component at frappeui.com
+
+### Task 6: **C**reate / New Ticket
+
+* Button
+* Dialog
+* FormControl
+* ErrorMessage
