@@ -13,8 +13,8 @@ Start by creating a new custom Frappe app named `simple_ticketing`. Now, create 
 For the last time, we will manually setup a VueJS, TailwindCSS and FrappeUI based frontend app (SPA). Let's start by creating a new VueJS project inside our custom app:
 
 ```bash
-$ cd apps/simple_ticketing
-$ npm create vue@latest
+cd apps/simple_ticketing
+npm create vue@latest
 ```
 
 > Note: we are setting up the VueJS project inside our custom app directory
@@ -22,9 +22,9 @@ $ npm create vue@latest
 Provide `frontend` when asked for a project name and `No` to everything else. Once this command has finished running, `cd` into the `frontend` directory:
 
 ```bash
-$ cd frontend
-$ npm install # install dependencies
-$ npm run dev # start the development server
+cd frontend
+npm install # install dependencies
+npm run dev # start the development server
 ```
 
 **Step 2: Setup TailwindCSS**
@@ -36,7 +36,7 @@ Follow [this guide](https://tailwindcss.com/docs/guides/vite#vue) to setup Tailw
 Start by installing the `frappe-ui` package:
 
 ```bash
-$ npm install frappe-ui
+npm install frappe-ui
 ```
 
 > Note: Make sure you are running these commands inside the `frontend` directory
@@ -101,7 +101,7 @@ At this point, you will be good to go! You can now try importing a few component
 
 Your first task is to create a header for our dashboard:
 
-https://github.com/BuildWithHussain/vtf-training/assets/34810212/62364513-82c4-4ec3-999e-4ed4c8c1a3d1
+<https://github.com/BuildWithHussain/vtf-training/assets/34810212/62364513-82c4-4ec3-999e-4ed4c8c1a3d1>
 
 Start by creating a new component named `Header.vue` and add it to your `App.vue` file. Here are the requirements for the header:
 
@@ -120,9 +120,10 @@ In order to do CRUD on our Frappe backend, we will need to first have a database
 1. Naming Rule: Auto-increment
 1. Fields:
     1. Title (data, mandatory)
+    1. Description (Text Editor)
     1. Status (select, default is Open) [Open, Waiting for reply, Resolved, Closed]
     1. Purchase Date (date)
-    1. Category (select) [Paper Quality, Delivery, Other]
+    1. Category (select, mandatory) [Paper Quality, Delivery, Other]
 
 Now, use FrappeUI's `ListView` component along with the `createListResource` utility to display the list of **Support Ticket**s from the backend! For keeping the code clean and organized, implement this in a separate component, `TicketList.vue` and add it to the root component (`App`):
 
@@ -135,6 +136,7 @@ Here are some implementation details:
 * 3 columns
 * Latest tickets should be shown first (hint: look for `orderBy` in list resource docs!)
 * Rows are not `selectable`
+* The `LoadingText` is shown while the list data is loading
 
 **Tip**
 
@@ -157,11 +159,36 @@ Render a `Badge` for the status column instead of plain text:
 
 ![Tickets list with badge component](../.github/images/tickets-list-v2.png)
 
-> Hint: Experiment with the **Cell Slot** variant of the ListView component at frappeui.com
+> Hint: Experiment with the **Cell Slot** variant of the ListView component on frappeui.com
 
 ### Task 6: **C**reate / New Ticket
 
-* Button
-* Dialog
-* FormControl
-* ErrorMessage
+The final task for today is:
+
+<https://github.com/BuildWithHussain/vtf-training/assets/34810212/5bf44a0f-42f9-4327-a129-42dd62e8476f>
+
+Your task is to implement create new ticket functionality as shown above. The button (`solid`, `lg`) is on the same row as the **Support Ticket** heading (cough.. flex-box!). Clicking the button opens up a dialog (of size `2xl`) with input for title, description, category and purchase date. Here are some more details about this form:
+
+* Title is a `FormControl` of type `text`
+* Category is a `FormControl` of type `select`
+* Purchase Date is a `FormControl` of type `date`
+
+This dialog has just one action: `Create` which inserts a new ticket to our backend using the list resource you created in the previous task.
+
+The `TextEditor` component used for capturing the description is not documented on FrappeUI website [yet](https://github.com/frappe/frappe-ui/issues/156). That is why I am providing you with the code you can use to get it working:
+
+```vue
+<TextEditor
+    ref="editor"
+    :fixedMenu="true"
+    editorClass="prose-sm max-w-none p-2 min-h-28"
+    placeholder="Describe your problem..."
+    @change="val => newTicket.description = val"
+/>
+```
+
+Instead of `v-model`, it has a change event listener that gives you the updated value on change of the editor contents, which we are setting to `newTicket.description`. You might have guessed that `newTicket` is a `reactive` object that I have used to store the ticket data. You can name it whatever you like.
+
+I would suggest you to re-watch Day 3 lecture if you get stuck in this task.
+
+*We will continue from here in the next assignment!*
