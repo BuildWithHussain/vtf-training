@@ -8,17 +8,14 @@ Here is what we have built till now:
 
 Here are the tasks at hand for this sprint:
 
-* Search and Sort in Ticket List View
+* Setup Client-side routing with Vue Router
 * Ticket Detail View
 * Setup Authentication
 * Fix Header Avatar
-* Knowledge Base View
 
 Before proceeding with the assignment, it is recommended to complete the Day 4 readings.
 
-### Task 1: Search and Sort in List View
-
-### Task 2: Setup Vue Router
+### Task 1: Setup Vue Router
 
 It is time to setup routing in our VueJS app. Let's start by [installing Vue Router](https://router.vuejs.org/installation.html):
 
@@ -75,7 +72,7 @@ Make sure you load the components lazily. Here are some docs to help you out:
 
 As soon as you setup the above routes, your frontend should load the tickets list and the route should be '/tickets'!
 
-### Task 3: Ticket Details Page
+### Task 2: Ticket Details Page
 
 Create a new component named `TicketDetails` (`TicketDetails.vue`) and configure a new route '/tickets/:name' which Should load this component. Also, **give a name** value of `TicketDetailsPage` to this route, so we can navigate to this page using this name instead of hardcoding the path. `:name` will be the ID of the ticket whose details will be displayed.
 
@@ -150,7 +147,7 @@ Here are some implementation details:
     </div>
     ```
 
-### Task 4: Basic Authentication & Route Protection
+### Task 3: Basic Authentication & Route Protection
 
 Right now, anyone can visit all of our pages, but we don't want that. We want to give the user access to this pages only if they are logged in. For that, we need to **somehow configure Vue router to prevent navigation if the user is not logged in**. Let's start simple and see how we can use the `beforeEach` hook on our router object to attach our own logic to call before each routing happens:
 
@@ -205,17 +202,92 @@ router.beforeEach((to, from, next) => {
 
 Voila! Try logging out from desk and visiting the frontend, if you have setup everything correctly, you should be redirected to the login page.
 
-### Task 5: Fix the Avatar
+### Task 4: Fix the Avatar
 
+In the previous assignment, we implemented an avatar in our `Header`, but it using a placeholder image. How about we get it to **display the profile image of the logged-in user**?! For this, first we will have to fetch some more information about the logged in user. We can do that by creating an API endpoint and using the `createResource` utility from FrappeUI for calling it. Create an API like the one shown below:
 
+```py
+@frappe.whitelist()
+def get_user_data():
+    current_user = frappe.session.user
+    user_data = frappe.db.get_value(
+        "User", 
+        current_user, 
+        ["full_name", "user_image"], 
+        as_dict=True
+    )
 
-### Task 6: Knowledge Base Page
+    return user_data
+```
 
-Add a new route at **'/kb'** that renders a component named `KnowledgeBase`. Here is how the `KnowledgeBase` component should look like:
+Now, we can create the resource in our `main.js` file:
 
-[TODO]
+```js
+import { createResource } from 'frappe-ui'
 
-Some things to note:
+const userResource = createResource({
+    url: 'simple_ticketing.api.get_user_data',
+    cache: 'current-user'
+})
 
-1. This should be a public route, i.e. not protected.
-1.
+// so that we can use this data in our entire component tree!
+// Think of this like making it a global variable.
+app.provide('userResource', userResource)
+```
+
+When do you think we should fetch this information? If you though when we know we are logged in, then you are very correct! Let's improve our `beforeEach` hook again:
+
+```js
++ router.beforeEach(async (to, from, next) => { // added async, so we can use await
+    const isUserLoggedIn = Boolean(sessionUser())
+
+    if (isUserLoggedIn) {
+        // load additional user data
++        await userResource.promise
+        // let them visit continue to "to"
+        next()
+    } else {
+        // redirect them to Frappe's login page
+        window.location.href = '/login'
+    }
+})
+```
+
+The resource object exposes a promise that we can await to **wait for fetching of the data**. Don't worry, after the first load, it will be cached (notice the cache key in `userResource`).
+
+Cool! Now we can go to our `Header` component, inject the `userResource` and render the avatar:
+
+```vue
+<template>
+    ...
+        <Avatar
+            :image="userResource.data.user_image"
+            ...
+        />
+    ...
+</template>
+
+<script setup>
+import { inject } from 'vue';
+
+const userResource = inject("userResource"); // the string key must match the one used in main.js
+</script>
+```
+
+Now that the avatar is fixed. Let's wrap with a little cleanup.
+
+### Task 5: Clean up
+
+Congratulations on reaching here! This was not an easy assignment, so tap yourself on the back.
+
+Notice your `main.js` file, it has a lot of things going on: router setup, session logic, app setup etc. This can get out of hand very quickly. As a rule of thumb, we want our `main.js` as small as possible and divide each responsibility into separate files:
+
+* A `router.js` file that contains the setting up of router (with routes, you can even have separate file for routes!) and attaching the `beforeEach` handler.
+
+* A `session.js` file that contains the `sessionUser` function and the user resource. Again, even the user resource can be put into a separate file (the convention is to create a folder named `data` for such data fetching resources).
+
+Try to **clean up your project based on the above tips** and see how you *feel* at the end 😉
+
+### Optional Tasks
+
+* Add a Log out button to our Avatar dropdown that logs out the user
