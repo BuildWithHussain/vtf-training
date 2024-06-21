@@ -293,3 +293,4 @@ Try to **clean up your project based on the above tips** and see how you *feel* 
 ### Optional Tasks
 
 * Add a Log out button to our Avatar dropdown that logs out the user
+* Add a 404 page (read Vue Router docs to see how)
