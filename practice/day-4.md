@@ -274,6 +274,8 @@ const userResource = inject("userResource"); // the string key must match the on
 </script>
 ```
 
+> You can use this pattern to load any "boot" data you might need for your application to function, for example, fetching roles (so we can do route protection or conditional rendering based on that), fetching system wide settings, and more!
+
 Now that the avatar is fixed. Let's wrap with a little cleanup.
 
 ### Task 5: Clean up
