@@ -262,6 +262,7 @@ Cool! Now we can go to our `Header` component, inject the `userResource` and upd
 <template>
     ...
         <Avatar
+            v-if="userResource.data"
             :image="userResource.data.user_image"
             ...
         />
@@ -274,6 +275,8 @@ import { inject } from 'vue';
 const userResource = inject("userResource"); // the string key must match the one used in main.js
 </script>
 ```
+
+The `v-if` is required because our header component is outside the routing tree and hence is rendered even before our routing logic (await for data fetch) kicks in. Try removing it and see the difference!
 
 > You can use this pattern to load any "boot" data you might need for your application to function, for example, fetching roles (so we can do route protection or conditional rendering based on that), fetching system wide settings, and more!
 
