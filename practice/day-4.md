@@ -227,6 +227,7 @@ import { createResource } from 'frappe-ui'
 
 const userResource = createResource({
     url: 'simple_ticketing.api.get_user_data',
+    auto: true, // required, since it should start fetching automatically
     cache: 'current-user'
 })
 
