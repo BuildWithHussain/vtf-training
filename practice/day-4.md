@@ -77,7 +77,7 @@ As soon as you setup the above routes, your frontend should load the tickets lis
 
 ### Task 3: Ticket Details Page
 
-Create a new component named `TicketDetails` (`TicketDetails.vue`) and configure a new route '/tickets/:name' which Should load this component. Also, **give a name** value of `TicketDetailsPage` to this route, so we can navigate to this page using this name instead of hardcoding the route. `:name` will be the ID of the ticket whose details will be displayed.
+Create a new component named `TicketDetails` (`TicketDetails.vue`) and configure a new route '/tickets/:name' which Should load this component. Also, **give a name** value of `TicketDetailsPage` to this route, so we can navigate to this page using this name instead of hardcoding the path. `:name` will be the ID of the ticket whose details will be displayed.
 
 #### Displaying the `name`
 
@@ -120,27 +120,35 @@ Here are some implementation details:
 
 * The Purchase Date is formatted using a library called [`dayjs`](https://day.js.org/docs/en/installation/node-js). Install this package in your frontend app. Here is a snippet of how to import and use this package in your components:
 
-```js
-import dayjs from 'dayjs'
+    ```js
+    import dayjs from 'dayjs'
 
-function getFormattedDate(dateString) {
-    // dateString comes from backend, e.g. '2024-06-13'
-    return dayjs(dateString).format("YOU-FIGURE-THIS-OUT")
-}
-```
+    function getFormattedDate(dateString) {
+        // dateString comes from backend, e.g. '2024-06-13'
+        return dayjs(dateString).format("YOU-FIGURE-THIS-OUT")
+    }
+    ```
 
 * The **Mark as resolved** button calls a whitelisted method that you have to create in your `Support Ticket` controller file:
 
-```py
-class SupportTicket(Document):
-    @frappe.whitelist()
-    def mark_as_resolved(self):
-        self.status = "Resolved"
-        self.save()
-        # More steps could go here, e.g. email notification.     
-```
+    ```py
+    class SupportTicket(Document):
+        @frappe.whitelist()
+        def mark_as_resolved(self):
+            self.status = "Resolved"
+            self.save()
+            # More steps could go here, e.g. email notification.     
+    ```
 
-Check out the documentation of `createDocumentResource` on frappeui.com to find out how you can easily work with whitelisted methods and you should be able to implement this feature in a breeze! Also, the status gets auto-updated in the frontend, FrappeUI magic!
+    Check out the documentation of `createDocumentResource` on frappeui.com to find out how you can easily work with whitelisted methods and you should be able to implement this feature in a breeze! Also, the status gets auto-updated in the frontend, FrappeUI magic!
+
+* The description field has HTML content, figure out how to render that in the page. You can use the `prose` tailwindCSS class to get the nice styling:
+
+    ```html
+    <div class="prose">
+        <!-- The description HTML should get rendered here -->
+    </div>
+    ```
 
 ### Task 4: Basic Authentication & Route Protection
 
