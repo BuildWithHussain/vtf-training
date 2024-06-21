@@ -49,3 +49,31 @@
 ## Day 3
 
 [LATER]
+
+## Day 4
+
+### VueJS
+
+1. [Maintaining list state with `key`](https://vuejs.org/guide/essentials/list.html#maintaining-state-with-key)
+
+1. [Composables](https://vuejs.org/guide/reusability/composables.html)
+
+1. [Provide/Inject](https://vuejs.org/guide/components/provide-inject.html)
+
+1. [The `component` Component](https://vuejs.org/api/built-in-special-elements.html#component)
+
+### Vue Router
+
+1. [Getting Started with Vue Router](https://router.vuejs.org/guide/)
+
+1. [Router History Modes](https://router.vuejs.org/guide/essentials/history-mode.html)
+
+1. [Dynamic Route Matching](https://router.vuejs.org/guide/essentials/dynamic-matching.html)
+
+1. [Matching Syntax](https://router.vuejs.org/guide/essentials/route-matching-syntax.html)
+
+1. [Named Routes](https://router.vuejs.org/guide/essentials/named-routes.html)
+
+1. [Programmatic Navigation](https://router.vuejs.org/guide/essentials/navigation.html)
+
+1. [Vue Router with Composition API](https://router.vuejs.org/guide/advanced/composition-api.html)
