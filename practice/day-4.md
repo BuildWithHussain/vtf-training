@@ -237,7 +237,7 @@ app.provide('userResource', userResource)
 
 When do you think we should fetch this information? If you though when we know we are logged in, then you are very correct! Let's improve our `beforeEach` hook again:
 
-```js
+```diff
 + router.beforeEach(async (to, from, next) => { // added async, so we can use await
     const isUserLoggedIn = Boolean(sessionUser())
 
