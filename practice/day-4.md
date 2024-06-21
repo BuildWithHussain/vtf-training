@@ -255,7 +255,7 @@ When do you think we should fetch this information? If you though when we know w
 
 The resource object exposes a promise that we can await to **wait for fetching of the data**. Don't worry, after the first load, it will be cached (notice the cache key in `userResource`).
 
-Cool! Now we can go to our `Header` component, inject the `userResource` and render the avatar:
+Cool! Now we can go to our `Header` component, inject the `userResource` and update the avatar image:
 
 ```vue
 <template>
