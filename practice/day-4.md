@@ -10,7 +10,7 @@ Here are the tasks at hand for this sprint:
 
 * Setup Client-side routing with Vue Router
 * Ticket Detail View
-* Setup Authentication
+* Setup Authorization
 * Fix Header Avatar
 
 Before proceeding with the assignment, it is recommended to complete the Day 4 readings.
