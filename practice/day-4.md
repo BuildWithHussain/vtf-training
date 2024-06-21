@@ -152,11 +152,62 @@ Here are some implementation details:
 
 ### Task 4: Basic Authentication & Route Protection
 
-...
+Right now, anyone can visit all of our pages, but we don't want that. We want to give the user access to this pages only if they are logged in. For that, we need to **somehow configure Vue router to prevent navigation if the user is not logged in**. Let's start simple and see how we can use the `beforeEach` hook on our router object to attach our own logic to call before each routing happens:
+
+```js
+router.beforeEach((to, from, next) => {
+    const isUserLoggedIn = ... // the part to figure out
+
+    if (isUserLoggedIn) {
+        // let them visit continue to "to"
+        next()
+    } else {
+        // redirect them to Frappe's login page
+        window.location.href = '/login'
+    }
+})
+```
+
+Assuming we want to protect all our routes, in the above code, we are checking if the user is logged in (we will get to this in a minute). If yes, we are calling the `next` function provided as argument to let them continue to the route they are visiting (i.e. `to`). If the user is not logged in, we will throw them to the login page.
+
+**Figuring out session user**
+
+Since in development our Vue frontend / SPA is running on the same host as our Frappe site (in production, it will be served on the same site!), the authentication session (cookies!) will be same. That's why the data fetching has been working till now: we were already logged in from the desk! Enough talk, let's get building! Copy paste the below function in your `main.js` file:
+
+```js
+function sessionUser() {
+  const cookies = new URLSearchParams(document.cookie.split('; ').join('&'))
+  let _sessionUser = cookies.get('user_id')
+  if (_sessionUser === 'Guest') {
+    _sessionUser = null
+  }
+  return _sessionUser
+}
+```
+
+This function checks the cookies for the `user_id`, if it is anything other than **Guest**, it means they are logged in. This function will return `null` if the user is not logged in. 
+
+We have the missing piece now, we can plug this into our `beforeEach` hook:
+
+```diff
+router.beforeEach((to, from, next) => {
++   const isUserLoggedIn = Boolean(sessionUser())
+
+    if (isUserLoggedIn) {
+        // let them visit continue to "to"
+        next()
+    } else {
+        // redirect them to Frappe's login page
+        window.location.href = '/login'
+    }
+})
+```
+
+Voila! Try logging out from desk and visiting the frontend, if you have setup everything correctly, you should be redirected to the login page.
 
 ### Task 5: Fix the Avatar
 
-...
+
 
 ### Task 6: Knowledge Base Page
 
