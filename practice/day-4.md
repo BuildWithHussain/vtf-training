@@ -112,13 +112,35 @@ Here `row.name` is the name of the ticket. Behind the scenes, FrappeUI will turn
 
 Now it is your time to do some exploration and implement the details page shown below:
 
-[TODO](image)
+<https://github.com/BuildWithHussain/vtf-training/assets/34810212/60011a1a-c52c-4657-90bc-544eb367890f>
 
-You have to use the `createDocumentResource` utility from `frappe-ui` to fetch a particular ticket document. We already have the **name** of the document in route params!
+You have to use the `createDocumentResource` utility from `frappe-ui` to fetch a particular ticket document. We already have the **name** of that document/ticket in route params!
 
-Some notes:
+Here are some implementation details:
 
-* 
+* The Purchase Date is formatted using a library called [`dayjs`](https://day.js.org/docs/en/installation/node-js). Install this package in your frontend app. Here is a snippet of how to import and use this package in your components:
+
+```js
+import dayjs from 'dayjs'
+
+function getFormattedDate(dateString) {
+    // dateString comes from backend, e.g. '2024-06-13'
+    return dayjs(dateString).format("YOU-FIGURE-THIS-OUT")
+}
+```
+
+* The **Mark as resolved** button calls a whitelisted method that you have to create in your `Support Ticket` controller file:
+
+```py
+class SupportTicket(Document):
+    @frappe.whitelist()
+    def mark_as_resolved(self):
+        self.status = "Resolved"
+        self.save()
+        # More steps could go here, e.g. email notification.     
+```
+
+Check out the documentation of `createDocumentResource` on frappeui.com to find out how you can easily work with whitelisted methods and you should be able to implement this feature in a breeze! Also, the status gets auto-updated in the frontend, FrappeUI magic!
 
 ### Task 4: Basic Authentication & Route Protection
 
