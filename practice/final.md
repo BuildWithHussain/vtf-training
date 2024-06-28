@@ -25,6 +25,14 @@ As a portal user (citizen of Agrabah), I should be able to:
 
 ### Mock-ups
 
+Figma File: https://www.figma.com/design/fKRV7OrINP4zWW9U0NZOBB/espresso-(Hussain's-Copy)?node-id=10302-3&t=grjvEPPs42kmficE-1
+
+You can view proper styles (and map TailwindCSS classes) by going into developer mode in Figma and checking the Inspect panel:
+
+![Figma](../.github/images/GoA-figma.png)
+
+> You might have to duplicate the above Figma file
+
 #### Home Page
 
 ![Home Page / Electricity Tab Screenshot](../.github/images/GoA-portal-home-electricity-tab.png)
